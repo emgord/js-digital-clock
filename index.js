@@ -22,17 +22,20 @@
 // }
 
 
-var mountain = "America/Denver";
 var pacific = 'America/Los_Angeles';
-var eastern = 'America/Detroit';
+var mountain = 'America/Denver';
 var central = 'America/Chicago';
+var eastern = 'America/Detroit';
 
 var intervalID = window.setInterval(displayTime,1000);
-function displayTime (zone) {
+function displayTime() {
   var clock = document.getElementById("clock");
-  var content = getTime(zone);
-  clock.innerHTML = content;
-};
+  var zones = [pacific, mountain, central, eastern];
+  for (i=0; i< zones.length; i++) {
+    var content = getTime(zones[i]);
+    clock.children[i].children[1].innerHTML = content;
+  }
+}
 
 var getTime = function (zone) {
   var time = new Date();
@@ -40,5 +43,3 @@ var getTime = function (zone) {
   var timeString = time.toLocaleDateString('en-US', options);
   return timeString;
 };
-
-displayTime(mountain);
